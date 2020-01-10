@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Note.css'
 
 export default function Note(props) {
+    const props1 = props.modified 
   return (
     <div className='Note'>
       <h2 className='Note_title'>
@@ -22,7 +23,7 @@ export default function Note(props) {
           Modified
           {' '}
           <span className='Date'>
-            {format(props.modified, 'Do MMM YYYY')}
+            new Date(props1("01 2019"))
           </span>
         </div>
       </div>
