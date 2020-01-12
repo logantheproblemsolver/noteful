@@ -8,7 +8,7 @@ import {
 import './index.css';
 import App from './App';
 
-library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble)
+library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble, faCheck)
 
 ReactDOM.render(
     <BrowserRouter>
