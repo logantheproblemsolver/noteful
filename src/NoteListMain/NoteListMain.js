@@ -12,12 +12,28 @@ import './NoteListMain.css'
 
 
 export default class NoteListMain extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            displayAddNoteForm: false,
+        }
+    }
+
+
     static defaultProps = {
         match: {
             params: {}
         }
     }
     static contextType = APIContext
+
+    addNoteDisplay() {
+        this.setState = ({
+            displayAddNoteForm: true,
+        })
+    }
+
+
 
     render() {
         const {folderId} = this.props.match.params
@@ -42,12 +58,18 @@ export default class NoteListMain extends React.Component {
                         to='/add-note'
                         type='button'
                         className='NoteListMain_add-note-button'
+                        onChange = {() => this.addNoteDisplay()}
                     >
                         <FontAwesomeIcon icon='plus' />
                         <br />
                         Note
                     </CircleButton>
-                    <AddNote />
+                    <div className="add_folder">                    
+                        {this.state.displayAddNoteForm === true && (
+                            <AddNote />
+                        )
+                        }
+                    </div>
                 </div>
             </section>
         )
