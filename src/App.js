@@ -70,7 +70,7 @@ class App extends Component {
             component={NotePageNav} />
           <Route 
             path="/add-note" 
-            component={NotePageNav} />
+            component={NoteListMain} />
       </> 
     );
   }

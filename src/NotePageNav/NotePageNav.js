@@ -4,7 +4,6 @@ import CircleButton from '../CircleButton/CircleButton'
 import APIContext from '../APIContext'
 import {findNote, findFolder} from '../notes-helpers'
 import AddFolder from '../AddFolder/AddFolder'
-import AddNote from '../AddNote/AddNote'
 import './NotePageNav.css'
 
 

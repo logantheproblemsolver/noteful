@@ -28,9 +28,16 @@ export default class NoteListMain extends React.Component {
     static contextType = APIContext
 
     addNoteDisplay() {
-        this.setState = ({
-            displayAddNoteForm: true,
-        })
+        if (this.state.displayAddNoteForm === false) {
+            return this.setState = ({
+                displayAddNoteForm: true,
+            })
+        } else {
+            return this.setState = ({
+                displayAddNoteForm: false,
+            })
+        }
+
     }
 
 
@@ -58,7 +65,7 @@ export default class NoteListMain extends React.Component {
                         to='/add-note'
                         type='button'
                         className='NoteListMain_add-note-button'
-                        onChange = {() => this.addNoteDisplay()}
+                        onClick = {() => this.addNoteDisplay()}
                     >
                         <FontAwesomeIcon icon='plus' />
                         <br />
