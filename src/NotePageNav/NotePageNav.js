@@ -43,6 +43,7 @@ export default class NotePageNav extends React.Component {
                 <div className="add_folder">
                     <AddFolder />
                 </div>
+
             </div>
         )
     
