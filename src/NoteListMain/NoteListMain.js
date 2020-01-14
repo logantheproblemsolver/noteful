@@ -5,7 +5,9 @@ import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
 import APIContext from '../APIContext'
 import {getNotesForFolder} from '../notes-helpers'
+import AddNote from '../AddNote/AddNote'
 import './NoteListMain.css'
+
 
 
 
@@ -45,6 +47,7 @@ export default class NoteListMain extends React.Component {
                         <br />
                         Note
                     </CircleButton>
+                    <AddNote />
                 </div>
             </section>
         )
