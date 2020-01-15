@@ -11,7 +11,9 @@ import { Route } from 'react-router-dom'
 class AddNote extends Component {
     constructor(props) {
         super(props);
-        this.notesInput = React.createRef();
+        this.state = {
+            note: '',
+        }
     }
 
     static contextType = APIContext
@@ -22,6 +24,19 @@ class AddNote extends Component {
         if (name.length === 0) {
             return 'Do not leave the notes field blank, please!'
         }
+    }
+
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.context.onSubmit(e)
+    }
+
+    handleNoteInput(e) {
+        e.preventDefault();
+        this.setState({
+            note: e.target.name.value,
+        })
     }
 
     render() {
@@ -41,13 +56,13 @@ class AddNote extends Component {
                     <br />
                     Back
                 </CircleButton>
-                <form className="addNote-group">
+                <form className="addNote-group" onSubmit = {e => this.handleSubmit(e)}>
                     <h1>Add a note!</h1>
                     <div className="note_title">
                         <label htmlFor="title">What would you like your Note Title to be?</label>
                         <br />
-                        <ValidationError message={this.validateNote()} />
-                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" ref={this.notesInput}/>
+
+                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" value={this.state.note.value} onChange={this.handleNoteInput}/>
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="note">What note would you like to put?</label>

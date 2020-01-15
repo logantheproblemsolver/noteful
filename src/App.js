@@ -60,6 +60,11 @@ class App extends Component {
     })
   }
 
+  handleNoteSubmit = (noteSubmit) => {
+    noteSubmit.preventDefault();
+    console.log(noteSubmit);
+  }
+
   renderNavRoutes() {
     const {notes, folders} = this.state;
 
@@ -84,6 +89,7 @@ class App extends Component {
             path="/add-note" 
             component={AddNote} 
             handleFolderData = {this.handleFolderData}
+            onSubmit = {noteSubmit => this.handleNoteSubmit(noteSubmit)}
             />
       </> 
     );
@@ -111,6 +117,8 @@ class App extends Component {
     );
   }
 
+  
+
 
   render() {
     const value = {
@@ -118,6 +126,7 @@ class App extends Component {
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote
     };
+
     return (
 
         <APIContext.Provider value={value}>
