@@ -16,8 +16,6 @@ class AddNote extends Component {
 
     static contextType = APIContext
 
-
-    
     validateNote(fieldValue) {
         const name = this.notesInput.value
         console.log(name)
@@ -48,7 +46,8 @@ class AddNote extends Component {
                     <div className="note_title">
                         <label htmlFor="title">What would you like your Note Title to be?</label>
                         <br />
-                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" />
+                        <ValidationError message={this.validateNote()} />
+                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" ref={this.notesInput}/>
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="note">What note would you like to put?</label>
