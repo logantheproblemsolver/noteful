@@ -9,6 +9,7 @@ import APIContext from './APIContext'
 import {getNotesForFolder, findNote, findFolder} from './notes-helpers';
 import AddNote from './AddNote/AddNote'
 import config from './config'
+import ValidationError from './ValidationError'
 import './App.css';
 
 
@@ -16,7 +17,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-      folders: [],
+      folders: ['first folder', 'second folder', 'third folder'],
       notes: [],
     }
   
@@ -52,9 +53,16 @@ class App extends Component {
     });
   }
 
+  handleFolderData = (event) => {
+    event.preventDefault();
+    this.setState = ({
+      folders: event.target.value,
+    })
+  }
+
   renderNavRoutes() {
     const {notes, folders} = this.state;
-    const folderList = this.state.folders
+
     return(
       <>
         {['/', '/folder/:folderId'].map(path => (
@@ -75,7 +83,7 @@ class App extends Component {
           <Route 
             path="/add-note" 
             component={AddNote} 
-            folderList={folderList}
+            handleFolderData = {this.handleFolderData}
             />
       </> 
     );
@@ -111,18 +119,21 @@ class App extends Component {
       deleteNote: this.handleDeleteNote
     };
     return (
-      <APIContext.Provider value={value}>
-        <div className="App">
-          <nav className="App_nav">{this.renderNavRoutes()}</nav>
-          <header>
-            <h1>
-              <Link to="/">Noteful</Link>{' '}
-              <FontAwesomeIcon icon="check-double" />
-            </h1>
-          </header>
-          <main className="App_main">{this.renderMainRoutes()}</main>
-        </div>
-      </APIContext.Provider>
+
+        <APIContext.Provider value={value}>
+            <div className="App">
+              <nav className="App_nav">{this.renderNavRoutes()}</nav>
+              <header>
+                <h1>
+                  <Link to="/">Noteful</Link>{' '}
+                  <FontAwesomeIcon icon="check-double" />
+                </h1>
+              </header>
+              <main className="App_main">{this.renderMainRoutes()}</main>
+            </div>
+        </APIContext.Provider>
+
+
 
     );
   }
