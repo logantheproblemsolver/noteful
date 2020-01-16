@@ -17,7 +17,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-      folders: ['first folder', 'second folder', 'third folder'],
+      folders: [],
       notes: [],
     }
   
@@ -129,7 +129,7 @@ class App extends Component {
 
     return (
 
-        <APIContext.Provider value={value}>
+        <APIContext.Provider value={value} >
             <div className="App">
               <nav className="App_nav">{this.renderNavRoutes()}</nav>
               <header>

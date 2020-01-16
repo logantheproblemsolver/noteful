@@ -9,12 +9,7 @@ import { Route } from 'react-router-dom'
 
 
 class AddNote extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            note: '',
-        }
-    }
+
 
     static contextType = APIContext
 
@@ -29,15 +24,10 @@ class AddNote extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.context.onSubmit(e)
+        this.props.onSubmit(e)
     }
 
-    handleNoteInput(e) {
-        e.preventDefault();
-        this.setState({
-            note: e.target.name.value,
-        })
-    }
+
 
     render() {
 
@@ -62,7 +52,7 @@ class AddNote extends Component {
                         <label htmlFor="title">What would you like your Note Title to be?</label>
                         <br />
 
-                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" value={this.state.note.value} onChange={this.handleNoteInput}/>
+                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" onChange={this.handleNoteInput}/>
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="note">What note would you like to put?</label>
