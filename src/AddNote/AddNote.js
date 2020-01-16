@@ -22,11 +22,6 @@ class AddNote extends Component {
     }
 
 
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.onSubmit(e)
-    }
-
 
 
     render() {
@@ -46,7 +41,7 @@ class AddNote extends Component {
                     <br />
                     Back
                 </CircleButton>
-                <form className="addNote-group" onSubmit = {e => this.handleSubmit(e)}>
+                <form className="addNote-group" onSubmit = {e => this.context.handleNoteSubmit(e)}>
                     <h1>Add a note!</h1>
                     <div className="note_title">
                         <label htmlFor="title">What would you like your Note Title to be?</label>

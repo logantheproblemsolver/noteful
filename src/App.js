@@ -65,6 +65,13 @@ class App extends Component {
     console.log(noteSubmit);
   }
 
+
+  handleFolderSubmit = (folderSubmit) => {
+    folderSubmit.preventDefault();
+    console.log(folderSubmit);
+  }
+
+
   renderNavRoutes() {
     const {notes, folders} = this.state;
 
@@ -124,7 +131,9 @@ class App extends Component {
     const value = {
       notes: this.state.notes,
       folders: this.state.folders,
-      deleteNote: this.handleDeleteNote
+      deleteNote: this.handleDeleteNote,
+      addNote: this.handleNoteSubmit,
+
     };
 
     return (
