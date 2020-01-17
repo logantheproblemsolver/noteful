@@ -3,6 +3,7 @@ import APIContext from '../APIContext'
 import CircleButton from '../CircleButton/CircleButton'
 import ValidationError from '../ValidationError'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import config from '../config'
 
 import { Route } from 'react-router-dom'
 
@@ -22,11 +23,39 @@ class AddNote extends Component {
     }
 
 
+    handleNoteSubmit = (noteSubmit) => {
+        noteSubmit.preventDefault();
+        const url = `${config.API_ENDPOINT}/notes`;
+        const options = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "text"
+            }
+        }
+
+        fetch(url, options)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Something went wrong, please try again later');
+                }
+                return res.json();
+            })
+            .then(data => {
+                console.log(data)
+            })
+            .catch(err => {
+                console.log(err.message)
+            });
+    }
+
 
 
     render() {
 
-        const folderOptions = this.context.folders.map((folder, i) => <option value={folder} key={i}> {folder} </option>)
+        const folderOptions = this.context.folders.map((folder, i) => <option value={folder} key={i}> {folder.name} </option>)
+
+        
+
 
 
         return (
@@ -41,7 +70,7 @@ class AddNote extends Component {
                     <br />
                     Back
                 </CircleButton>
-                <form className="addNote-group" onSubmit = {e => this.context.handleNoteSubmit(e)}>
+                <form className="addNote-group" onSubmit = {e => this.handleNoteSubmit(e)}>
                     <h1>Add a note!</h1>
                     <div className="note_title">
                         <label htmlFor="title">What would you like your Note Title to be?</label>

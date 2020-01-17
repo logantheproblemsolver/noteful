@@ -44,6 +44,8 @@ class App extends Component {
       .catch(error => {
         console.error({error});
       });
+
+
   }
 
 
@@ -58,17 +60,16 @@ class App extends Component {
     this.setState = ({
       folders: event.target.value,
     })
+
+    console.log(this.state.folders)
+
   }
 
-  handleNoteSubmit = (noteSubmit) => {
-    noteSubmit.preventDefault();
-    console.log(noteSubmit);
-  }
 
 
   handleFolderSubmit = (folderSubmit) => {
     folderSubmit.preventDefault();
-    console.log(folderSubmit);
+    console.log('I am here');
   }
 
 
