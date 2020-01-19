@@ -10,7 +10,14 @@ import { Route } from 'react-router-dom'
 
 
 class AddNote extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+            note: '',
+            folder: '',
+        }
+    }
 
     static contextType = APIContext
 
@@ -22,8 +29,28 @@ class AddNote extends Component {
         }
     }
 
+    handleNewNote = (e) => {
+        this.setState = ({
+            note: e,
+        })
+
+    }
+
+    handleNewTitle = (e) => {
+        this.setState = ({
+            title: e,
+        })
+    }
+
+    handleFolderChoice = (e) => {
+        this.setState = ({
+            folder: e,
+        })
+    }
+
 
     handleNoteSubmit = (noteSubmit) => {
+        console.log(this.state.note)
         noteSubmit.preventDefault();
         const url = `${config.API_ENDPOINT}/notes`;
         const options = {
@@ -76,12 +103,12 @@ class AddNote extends Component {
                         <label htmlFor="title">What would you like your Note Title to be?</label>
                         <br />
 
-                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" onChange={this.handleNoteInput}/>
+                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" value={this.state.title} onChange={e => this.handleNewTitle(e.target.value)} />
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="note">What note would you like to put?</label>
                         <br />
-                        <input type="text" className="addNoteStuff" name="note" defaultValue="Put your note here" />
+                        <input type="text" className="addNoteStuff" name="note" defaultValue="Put your note here" value={this.state.note} onChange={e => this.handleNewNote(e.target.value)}/>
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="folder">Which folder would you like it in?</label>
@@ -91,7 +118,8 @@ class AddNote extends Component {
                         id="folderSelector"
                         className="folderSelector"
                         defaultValue='first folder'
-                        onChange={this.context.handleFolderData}
+                        value={this.state.folder}
+                        onChange={e => this.handleFolderChoice(e.target.value)}
                         >
                             {folderOptions}
                         </select>
