@@ -28,7 +28,9 @@ class AddFolder extends Component {
             method: 'POST',
             headers: {
                 "Content-Type": "text"
-            }
+            },
+            body: JSON.strongify(this.state.folder)
+            
         }
 
         fetch(url, options)
