@@ -15,12 +15,11 @@ export default class Note extends React.Component {
 
   static contextType = APIContext;
 
-  handleClickDelete = e => {
-    e.preventDefault()
-    const noteId = this.props.noteId
+  handleClickDelete = (id) => {
+    id.preventDefault()
   
 
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/notes/${id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -32,8 +31,8 @@ export default class Note extends React.Component {
         return res.json()
       })
       .then(() => {
-        this.context.deleteNote(noteId)
-        this.props.onDeleteNote(noteId)
+        this.context.deleteNote(id)
+        this.props.onDeleteNote(id)
       })
       .catch(error => {
         console.error({error})
@@ -52,7 +51,7 @@ export default class Note extends React.Component {
         <button 
           className='Note_delete'
           type='button'
-          onClick={this.handleClickDelete}
+          onClick={this.handleClickDelete(id)}
         >
           <FontAwesomeIcon icon='trash-alt' />
           {' '} 
