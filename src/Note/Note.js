@@ -16,7 +16,7 @@ export default class Note extends React.Component {
   static contextType = APIContext;
 
   handleClickDelete = (id) => {
-    id.preventDefault()
+    id.preventDefault();
   
 
     fetch(`${config.API_ENDPOINT}/notes/${id}`, {
@@ -51,7 +51,7 @@ export default class Note extends React.Component {
         <button 
           className='Note_delete'
           type='button'
-          onClick={this.handleClickDelete(id)}
+          onClick={(id) => this.handleClickDelete(id)}
         >
           <FontAwesomeIcon icon='trash-alt' />
           {' '} 
