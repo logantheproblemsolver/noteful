@@ -32,7 +32,7 @@
 }
 
 .App_main {
-  background-color: #102541;
+  background-color: lightblue;
   grid-area: main;
   height: calc(100vh - 120px);
   overflow: auto;

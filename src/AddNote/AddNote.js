@@ -5,7 +5,7 @@ import ValidationError from '../ValidationError'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import config from '../config'
 
-import { Route } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 
@@ -13,7 +13,6 @@ class AddNote extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
             note: '',
             folder: '',
         }
@@ -36,11 +35,6 @@ class AddNote extends Component {
 
     }
 
-    handleNewTitle = (e) => {
-        this.setState = ({
-            title: e,
-        })
-    }
 
     handleFolderChoice = (e) => {
         this.setState = ({
@@ -51,15 +45,14 @@ class AddNote extends Component {
 
     handleNoteSubmit = (noteSubmit) => {
         noteSubmit.preventDefault();
-        const addedTitle = this.state.title;
-        const addedNote = this.state.note;
-        const chosenFolder = this.state.folder;
-        const addedData = {addedTitle, addedNote, chosenFolder}
+        const addedNote = {note: this.state.note};
+        const chosenFolder = {folder: this.state.folder};
+        const addedData = {addedNote, chosenFolder}
         const url = `${config.API_ENDPOINT}/notes`;
         const options = {
             method: 'POST',
             headers: {
-                "Content-Type": "text"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(addedData)
         }
@@ -103,23 +96,19 @@ class AddNote extends Component {
                 </CircleButton>
                 <form className="addNote-group" onSubmit = {e => this.handleNoteSubmit(e)}>
                     <h1>Add a note!</h1>
-                    <div className="note_title">
-                        <label htmlFor="title">What would you like your Note Title to be?</label>
-                        <br />
 
-                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" onChange={e => this.handleNewTitle(e.target.value)} />
-                    </div>
                     <div className="addNote-group">
-                        <label htmlFor="note">What note would you like to put?</label>
+                        <label htmlFor="noteContext">What note would you like to put?</label>
                         <br />
-                        <input type="text" className="addNoteStuff" name="note" defaultValue="Put your note here" onChange={e => this.handleNewNote(e.target.value)}/>
+                        <input type="text" className="addNoteStuff" name="noteContext" id="noteContext" defaultValue="Put your note here" onChange={e => this.handleNewNote(e.target.value)}/>
                     </div>
                     <div className="addNote-group">
-                        <label htmlFor="folder">Which folder would you like it in?</label>
+                        <label htmlFor="folderSelector">Which folder would you like it in?</label>
                         <br />
                         <select 
                         defaultValue="Select a Folder"
                         id="folderSelector"
+                        name="folderSelector"
                         className="folderSelector"
                         defaultValue='first folder'
                         onChange={e => this.handleFolderChoice(e.target.value)}
@@ -127,11 +116,14 @@ class AddNote extends Component {
                             {folderOptions}
                         </select>
                     </div>
+                    <Link to="/">
                     <button
                     type="submit"
                     >
                         Submit Note
                     </button>
+                    </Link>
+
                     <button 
                     type="reset"
                     

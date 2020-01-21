@@ -1,5 +1,6 @@
 import React, {Component} from  'react';
 import config from '../config'
+import {Link} from 'react-router-dom'
 
 
 
@@ -27,9 +28,9 @@ class AddFolder extends Component {
         const options = {
             method: 'POST',
             headers: {
-                "Content-Type": "text"
+                "Content-Type": "application/json"
             },
-            body: JSON.strongify(this.state.folder)
+            body: JSON.stringify({folder: this.state.folder})
             
         }
 
@@ -52,14 +53,24 @@ class AddFolder extends Component {
     render() {
         return (
             <div className="addFolder" onSubmit={e => this.handleFolderSubmit(e.target.value)}>
-                <form className="addFolderName">
+                <form className="addFolderName" onSubmit={e => this.createNewFolder(e.target.value)}>
                     <h2>Create a new folder!</h2>
                     <div className="folderName">
-                        <label htmlFor="name">Folder Name: </label>
-                        <input type="text" className="folderNameInput" name="name" id="folderName" placeholder="New Folder" onChange={e => this.createNewFolder(e.target.value)} /> 
-                        <button type="submit" className="submitFolder">
-                            Add Folder
-                        </button>
+                        <label htmlFor="folderInput">
+                            Folder Name: 
+                            <br />
+                            <input type="text" className="folderNameInput" name="folderInput" id="folderInput" placeholder="New Folder" /> 
+                        </label>
+                        <br />
+                        <Link to="/">
+                            <button 
+                            type="submit" 
+                            className="submitFolder"
+                            >
+                                Add Folder
+                            </button>
+                        </Link>
+  
                         <button type="reset" className="cancelFolder">
                             Cancel
                         </button>
