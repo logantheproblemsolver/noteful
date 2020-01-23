@@ -53,6 +53,13 @@ class App extends Component {
     });
   }
 
+  handleNoteAdd = addNote => {
+    const noteAdd = this.state.note.push(addNote);
+    this.setState = ({
+      note: noteAdd
+    })
+  }
+
   handleFolderData = (event) => {
     event.preventDefault();
     this.setState = ({

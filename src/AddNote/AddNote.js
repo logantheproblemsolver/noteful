@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import APIContext from '../APIContext'
 import CircleButton from '../CircleButton/CircleButton'
-import ValidationError from '../ValidationError'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import config from '../config'
 
@@ -65,7 +64,9 @@ class AddNote extends Component {
                 return res.json();
             })
             .then(data => {
-                console.log("RES.JSON: ", data)
+                this.handleNewNote()
+                this.handleFolderChoice()
+                console.log(this.state.note)
             })
             .catch(err => {
                 console.log(err.message)
@@ -94,7 +95,7 @@ class AddNote extends Component {
                     <br />
                     Back
                 </CircleButton>
-                <form className="addNote-group" onSubmit = {e => this.handleNoteSubmit(e)}>
+                <form className="addNote-group" >
                     <h1>Add a note!</h1>
 
                     <div className="addNote-group">
@@ -110,7 +111,6 @@ class AddNote extends Component {
                         id="folderSelector"
                         name="folderSelector"
                         className="folderSelector"
-                        defaultValue='first folder'
                         onChange={e => this.handleFolderChoice(e.target.value)}
                         >
                             {folderOptions}
@@ -119,6 +119,7 @@ class AddNote extends Component {
                     <Link to="/">
                     <button
                     type="submit"
+                    onClick={e => this.handleNoteSubmit(e)}
                     >
                         Submit Note
                     </button>
