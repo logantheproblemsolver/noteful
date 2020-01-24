@@ -31,7 +31,7 @@ class AddFolder extends Component {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({folder: this.state.folder})
+            body: JSON.stringify({name: this.state.folder})
             
         }
 
