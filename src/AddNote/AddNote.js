@@ -25,7 +25,12 @@ class AddNote extends Component {
     handleNoteSubmit = (noteSubmit) => {
         noteSubmit.preventDefault();
  
-        const addedData = {note: this.context.notes}
+        const addedData = {
+            name: this.ref.addName.value,
+            content: this.ref.addNote.value,
+            folder: this.ref.addFolder.value,
+        
+        }
         const url = `${config.API_ENDPOINT}/notes`;
         const options = {
             method: 'POST',
@@ -78,13 +83,17 @@ class AddNote extends Component {
                     <br />
                     Back
                 </CircleButton>
-                <form className="addNote-group"  >
+                <form className="addNote-group"  onSubmit={e => this.handleNoteSubmit(e)}>
                     <h1>Add a note!</h1>
-
+                    <div className="note_title">
+                        <label htmlFor="title">What would you like your Note Name to be?</label>
+                        <br />
+                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" ref="addName" />
+                    </div>
                     <div className="addNote-group">
                         <label htmlFor="noteContext">What note would you like to put?</label>
                         <br />
-                        <input type="text" className="addNoteStuff" name="noteContext" id="noteContext" defaultValue="Put your note here" />
+                        <input type="text" className="addNoteStuff" name="noteContext" id="noteContext" defaultValue="Put your note here" ref="addNote" />
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="folderSelector">Which folder would you like it in?</label>
@@ -94,19 +103,19 @@ class AddNote extends Component {
                         id="folderSelector"
                         name="folderSelector"
                         className="folderSelector"
-                        onClick={e => this.handleFolderChoice(e.target.value)}
+                        ref="addFolder"
                         >
                             {folderOptions}
                         </select>
                     </div>
-                    <Link to="/">
+
                     <button
                     type="submit"
-                    onClick={e => this.handleNoteSubmit(e)}
+                    
                     >
                         Submit Note
                     </button>
-                    </Link>
+
 
                     <button 
                     type="reset"
