@@ -16,14 +16,15 @@ class AddFolder extends Component {
 
 
     createNewFolder = (e) => {
-        this.setState = ({
-            folder: e,
+        console.log(e.target.value)
+        this.setState({
+            folder: e.target.value,
         })
     }
 
 
     handleFolderSubmit = (folderSubmit) => {
-        folderSubmit.preventDefault();
+        console.log(folderSubmit)
         const url = `${config.API_ENDPOINT}/folders`;
         const options = {
             method: 'POST',
@@ -37,12 +38,14 @@ class AddFolder extends Component {
         fetch(url, options)
             .then(res => {
                 if (!res.ok) {
+                    console.log(res.ok)
                     throw new Error('Something went wrong, please try again later');
                 }
                 return res.json();
             })
             .then(data => {
-                this.createNewFolder();
+                console.log(data)
+                console.log(this.state) 
             })
             .catch(err => {
                 console.log(err.message)
@@ -52,24 +55,23 @@ class AddFolder extends Component {
 
     render() {
         return (
-            <div className="addFolder" onSubmit={e => this.handleFolderSubmit(e.target.value)}>
-                <form className="addFolderName" onSubmit={e => this.createNewFolder(e.target.value)}>
+            <div className="addFolder" >
+                <form className="addFolderName" onSubmit={e => this.handleFolderSubmit(e)}>
                     <h2>Create a new folder!</h2>
                     <div className="folderName">
                         <label htmlFor="folderInput">
                             Folder Name: 
                             <br />
-                            <input type="text" className="folderNameInput" name="folderInput" id="folderInput" placeholder="New Folder" /> 
+                            <input type="text" className="folderNameInput" name="folder" id="folderInput" placeholder="New Folder" onChange={this.createNewFolder} /> 
                         </label>
                         <br />
-                        <Link to="/">
+
                             <button 
                             type="submit" 
                             className="submitFolder"
                             >
                                 Add Folder
                             </button>
-                        </Link>
   
                         <button type="reset" className="cancelFolder">
                             Cancel

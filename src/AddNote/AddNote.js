@@ -31,13 +31,15 @@ class AddNote extends Component {
 
     onChange = (event) => {
         console.log(event);
-        this.setState = ({
+        this.setState({
             [event.target.name]: event.target.value,
         });
+        console.log(this.state)
     }
 
 
     handleNoteSubmit = (noteSubmit) => {
+        console.log()
         noteSubmit.preventDefault();
         const addedData = {
             notes: this.state.notes,
@@ -66,7 +68,7 @@ class AddNote extends Component {
                 return res.json();
             })
             .then(data => {
-                console.log(data)
+                this.context.addNote();
             })
             .catch(err => {
                 console.log(err.message)
@@ -77,12 +79,6 @@ class AddNote extends Component {
 
     render() {
         const folderOptions = this.context.folders.map((folder, i) => <option value={folder.id} key={i}> {folder.name} </option>)
-
-       
-
-        
-
-
 
         return (
             <div className="addNote">
@@ -101,12 +97,12 @@ class AddNote extends Component {
                     <div className="note_title">
                         <label htmlFor="title">What would you like your Note Name to be?</label>
                         <br />
-                        <input type="text" className="addNoteTitle" name="notes" placeholder="Add Your Note Name Here" value={this.state.notes} onChange={this.onChange} />
+                        <input type="text" className="addNoteTitle" name="notes" placeholder="Add Your Note Name Here" onChange={this.onChange} />
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="noteContext">What note would you like to put?</label>
                         <br />
-                        <input type="text" className="addNoteStuff" name="content" id="noteContext" placeholder="Note Content" value={this.state.content} onChange={this.onChange} required/>
+                        <input type="text" className="addNoteStuff" name="content" id="noteContext" placeholder="Note Content"  onChange={this.onChange} required/>
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="folderSelector">Which folder would you like it in?</label>

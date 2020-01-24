@@ -141,7 +141,7 @@ class App extends Component {
     };
     return (
 
-        <APIContext.Provider value={value} >
+        <APIContext.Provider value={value} addNote={this.handleNoteAdd}>
             <div className="App">
               <nav className="App_nav">{this.renderNavRoutes()}</nav>
               <header>
