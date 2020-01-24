@@ -28,8 +28,7 @@ class AddNote extends Component {
         const addedData = {
             name: this.ref.addName.value,
             content: this.ref.addNote.value,
-            folder: this.ref.addFolder.value,
-        
+            folder: this.ref.addFolder.value,        
         }
         const url = `${config.API_ENDPOINT}/notes`;
         const options = {
@@ -63,7 +62,7 @@ class AddNote extends Component {
     render() {
         console.log(this.context.notes);
         console.log(this.context.folders)
-        const folderOptions = this.context.folders.map((folder, i) => <option value={folder} key={i}> {folder.name} </option>)
+        const folderOptions = this.context.folders.map((folder, i) => <option value={folder.id} key={i}> {folder.name} </option>)
 
        
 
