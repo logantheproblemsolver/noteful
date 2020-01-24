@@ -29,26 +29,13 @@ class AddNote extends Component {
         }
     }
 
-    handleNewNoteName = (event) => {
+    onChange = (event) => {
         console.log(event);
         this.setState = ({
-            notes: event,
-        })
+            [event.target.name]: event,
+        });
     }
 
-    handleNewNote = (event) => {
-        console.log(event);
-        this.setState = ({
-            content: event,
-        })
-    }
-
-    handleFolderChoice = (event) => {
-        console.log(event);
-        this.setState = ({
-            folder: event,
-        })
-    }
 
     handleNoteSubmit = (noteSubmit) => {
         noteSubmit.preventDefault();
@@ -57,6 +44,7 @@ class AddNote extends Component {
             content: this.state.content,
             folder: this.state.folder,
         }
+        console.log(addedData)
 
         const url = `${config.API_ENDPOINT}/notes`;
         const options = {
@@ -113,12 +101,12 @@ class AddNote extends Component {
                     <div className="note_title">
                         <label htmlFor="title">What would you like your Note Name to be?</label>
                         <br />
-                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title"  onChange={(name) => this.handleNewNoteName(name.target.value)} />
+                        <input type="text" className="addNoteTitle" name="notes" defaultValue="Note Title"  onChange={this.onChange} />
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="noteContext">What note would you like to put?</label>
                         <br />
-                        <input type="text" className="addNoteStuff" name="noteContext" id="noteContext" defaultValue="Put your note here" onChange={(note) => this.handleNewNote(note.target.value)}required/>
+                        <input type="text" className="addNoteStuff" name="content" id="noteContext" defaultValue="Put your note here" onChange={this.onChange}required/>
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="folderSelector">Which folder would you like it in?</label>
@@ -126,9 +114,9 @@ class AddNote extends Component {
                         <select 
                         defaultValue="Select a Folder"
                         id="folderSelector"
-                        name="folderSelector"
+                        name="folder"
                         className="folderSelector"
-                        onChange={(folder) => this.handleFolderChoice(folder.target.value)}
+                        onChange={this.onChange}
                         >
                             {folderOptions}
                         </select>
