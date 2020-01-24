@@ -32,7 +32,7 @@ class AddNote extends Component {
     onChange = (event) => {
         console.log(event);
         this.setState = ({
-            [event.target.name]: event,
+            [event.target.name]: event.target.value,
         });
     }
 
@@ -101,18 +101,18 @@ class AddNote extends Component {
                     <div className="note_title">
                         <label htmlFor="title">What would you like your Note Name to be?</label>
                         <br />
-                        <input type="text" className="addNoteTitle" name="notes" defaultValue="Note Title"  onChange={this.onChange} />
+                        <input type="text" className="addNoteTitle" name="notes" placeholder="Add Your Note Name Here" value={this.state.notes} onChange={this.onChange} />
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="noteContext">What note would you like to put?</label>
                         <br />
-                        <input type="text" className="addNoteStuff" name="content" id="noteContext" defaultValue="Put your note here" onChange={this.onChange}required/>
+                        <input type="text" className="addNoteStuff" name="content" id="noteContext" placeholder="Note Content" value={this.state.content} onChange={this.onChange} required/>
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="folderSelector">Which folder would you like it in?</label>
                         <br />
                         <select 
-                        defaultValue="Select a Folder"
+                        value={this.state.folder}
                         id="folderSelector"
                         name="folder"
                         className="folderSelector"
