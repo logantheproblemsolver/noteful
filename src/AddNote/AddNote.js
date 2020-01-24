@@ -9,13 +9,6 @@ import {Link} from 'react-router-dom'
 
 
 class AddNote extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            note: '',
-            folder: '',
-        }
-    }
 
     static contextType = APIContext
 
@@ -27,26 +20,12 @@ class AddNote extends Component {
         }
     }
 
-    handleNewNote = (e) => {
-        this.setState = ({
-            note: e,
-        })
-
-    }
-
-
-    handleFolderChoice = (e) => {
-        this.setState = ({
-            folder: e,
-        })
-    }
 
 
     handleNoteSubmit = (noteSubmit) => {
         noteSubmit.preventDefault();
-        const addedNote = {note: this.state.note};
-        const chosenFolder = {folder: this.state.folder};
-        const addedData = {addedNote, chosenFolder}
+ 
+        const addedData = {note: this.context.notes}
         const url = `${config.API_ENDPOINT}/notes`;
         const options = {
             method: 'POST',
@@ -56,6 +35,9 @@ class AddNote extends Component {
             body: JSON.stringify(addedData)
         }
 
+
+
+
         fetch(url, options)
             .then(res => {
                 if (!res.ok) {
@@ -64,9 +46,7 @@ class AddNote extends Component {
                 return res.json();
             })
             .then(data => {
-                this.handleNewNote()
-                this.handleFolderChoice()
-                console.log(this.state.note)
+                this.context.handleNoteAdd();
             })
             .catch(err => {
                 console.log(err.message)
@@ -76,8 +56,11 @@ class AddNote extends Component {
 
 
     render() {
-
+        console.log(this.context.notes);
+        console.log(this.context.folders)
         const folderOptions = this.context.folders.map((folder, i) => <option value={folder} key={i}> {folder.name} </option>)
+
+       
 
         
 
@@ -95,13 +78,13 @@ class AddNote extends Component {
                     <br />
                     Back
                 </CircleButton>
-                <form className="addNote-group" >
+                <form className="addNote-group"  >
                     <h1>Add a note!</h1>
 
                     <div className="addNote-group">
                         <label htmlFor="noteContext">What note would you like to put?</label>
                         <br />
-                        <input type="text" className="addNoteStuff" name="noteContext" id="noteContext" defaultValue="Put your note here" onChange={e => this.handleNewNote(e.target.value)}/>
+                        <input type="text" className="addNoteStuff" name="noteContext" id="noteContext" defaultValue="Put your note here" />
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="folderSelector">Which folder would you like it in?</label>
@@ -111,7 +94,7 @@ class AddNote extends Component {
                         id="folderSelector"
                         name="folderSelector"
                         className="folderSelector"
-                        onChange={e => this.handleFolderChoice(e.target.value)}
+                        onClick={e => this.handleFolderChoice(e.target.value)}
                         >
                             {folderOptions}
                         </select>

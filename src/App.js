@@ -136,10 +136,9 @@ class App extends Component {
       notes: this.state.notes,
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
-      addNote: this.handleNoteSubmit,
+      addNote: this.handleNoteAdd,
 
     };
-
     return (
 
         <APIContext.Provider value={value} >

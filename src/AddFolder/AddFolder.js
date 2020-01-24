@@ -42,7 +42,7 @@ class AddFolder extends Component {
                 return res.json();
             })
             .then(data => {
-                console.log(data)
+                this.createNewFolder();
             })
             .catch(err => {
                 console.log(err.message)
