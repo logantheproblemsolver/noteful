@@ -10,6 +10,15 @@ import {Link} from 'react-router-dom'
 
 class AddNote extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            notes: ' ',
+            content: ' ',
+            folder: ' ',
+        }
+    }
+
     static contextType = APIContext
 
     validateNote(fieldValue) {
@@ -20,16 +29,35 @@ class AddNote extends Component {
         }
     }
 
+    handleNewNoteName = (event) => {
+        console.log(event);
+        this.setState = ({
+            notes: event,
+        })
+    }
 
+    handleNewNote = (event) => {
+        console.log(event);
+        this.setState = ({
+            content: event,
+        })
+    }
+
+    handleFolderChoice = (event) => {
+        console.log(event);
+        this.setState = ({
+            folder: event,
+        })
+    }
 
     handleNoteSubmit = (noteSubmit) => {
         noteSubmit.preventDefault();
- 
         const addedData = {
-            name: this.ref.addName.value,
-            content: this.ref.addNote.value,
-            folder: this.ref.addFolder.value,        
+            notes: this.state.notes,
+            content: this.state.content,
+            folder: this.state.folder,
         }
+
         const url = `${config.API_ENDPOINT}/notes`;
         const options = {
             method: 'POST',
@@ -50,7 +78,7 @@ class AddNote extends Component {
                 return res.json();
             })
             .then(data => {
-                this.context.handleNoteAdd();
+                console.log(data)
             })
             .catch(err => {
                 console.log(err.message)
@@ -60,8 +88,6 @@ class AddNote extends Component {
 
 
     render() {
-        console.log(this.context.notes);
-        console.log(this.context.folders)
         const folderOptions = this.context.folders.map((folder, i) => <option value={folder.id} key={i}> {folder.name} </option>)
 
        
@@ -87,12 +113,12 @@ class AddNote extends Component {
                     <div className="note_title">
                         <label htmlFor="title">What would you like your Note Name to be?</label>
                         <br />
-                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title" ref="addName" />
+                        <input type="text" className="addNoteTitle" name="title" defaultValue="Note Title"  onChange={(name) => this.handleNewNoteName(name.target.value)} />
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="noteContext">What note would you like to put?</label>
                         <br />
-                        <input type="text" className="addNoteStuff" name="noteContext" id="noteContext" defaultValue="Put your note here" ref="addNote" />
+                        <input type="text" className="addNoteStuff" name="noteContext" id="noteContext" defaultValue="Put your note here" onChange={(note) => this.handleNewNote(note.target.value)}required/>
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="folderSelector">Which folder would you like it in?</label>
@@ -102,7 +128,7 @@ class AddNote extends Component {
                         id="folderSelector"
                         name="folderSelector"
                         className="folderSelector"
-                        ref="addFolder"
+                        onChange={(folder) => this.handleFolderChoice(folder.target.value)}
                         >
                             {folderOptions}
                         </select>
