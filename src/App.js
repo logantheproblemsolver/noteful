@@ -54,27 +54,24 @@ class App extends Component {
   }
 
   handleNoteAdd = addNote => {
-    const noteAdd = this.state.note.push(addNote);
-    this.setState = ({
-      note: noteAdd
+    this.setState({
+      notes: [...this.state.notes, addNote],
     })
   }
 
   handleFolderData = (event) => {
     event.preventDefault();
-    this.setState = ({
+    this.setState({
       folders: event.target.value,
     })
 
-    console.log(this.state.folders)
-
   }
-
-
 
   handleFolderSubmit = (folderSubmit) => {
     folderSubmit.preventDefault();
-    console.log('I am here');
+    this.setState({
+      folders: [...this.state.folders, folderSubmit],
+    })
   }
 
 
@@ -141,7 +138,7 @@ class App extends Component {
     };
     return (
 
-        <APIContext.Provider value={value} addNote={this.handleNoteAdd}>
+        <APIContext.Provider value={value} addNote={this.handleNoteAdd} addFolder={this.handleFolderSubmit}>
             <div className="App">
               <nav className="App_nav">{this.renderNavRoutes()}</nav>
               <header>

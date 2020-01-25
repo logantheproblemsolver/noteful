@@ -1,6 +1,5 @@
 import React, {Component} from  'react';
 import config from '../config'
-import {Link} from 'react-router-dom'
 
 
 
@@ -44,8 +43,7 @@ class AddFolder extends Component {
                 return res.json();
             })
             .then(data => {
-                console.log(data)
-                console.log(this.state) 
+                this.context.addfolder()
             })
             .catch(err => {
                 console.log(err.message)
@@ -65,14 +63,13 @@ class AddFolder extends Component {
                             <input type="text" className="folderNameInput" name="folder" id="folderInput" placeholder="New Folder" onChange={this.createNewFolder} /> 
                         </label>
                         <br />
-
                             <button 
                             type="submit" 
                             className="submitFolder"
+
                             >
                                 Add Folder
                             </button>
-  
                         <button type="reset" className="cancelFolder">
                             Cancel
                         </button>
