@@ -25,7 +25,7 @@ class AddFolder extends Component {
 
     handleFolderSubmit = (folderSubmit) => {
         console.log(folderSubmit)
-        const url = `${config.API_ENDPOINT}/folders`;
+        const url = `${config.API_ENDPOINT}/folders`
         const options = {
             method: 'POST',
             headers: {
