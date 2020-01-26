@@ -4,7 +4,6 @@ import CircleButton from '../CircleButton/CircleButton'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import config from '../config'
 
-import {Link} from 'react-router-dom'
 
 
 
