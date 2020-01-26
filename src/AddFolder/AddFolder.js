@@ -60,7 +60,7 @@ class AddFolder extends Component {
                         <label htmlFor="folderInput">
                             Folder Name: 
                             <br />
-                            <input type="text" className="folderNameInput" name="folder" id="folderInput" placeholder="New Folder" onChange={this.createNewFolder} /> 
+                            <input type="text" className="folderNameInput" name="folder" id="folderInput" placeholder="New Folder" onChange={this.createNewFolder} required /> 
                         </label>
                         <br />
                             <button 

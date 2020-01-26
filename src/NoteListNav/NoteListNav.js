@@ -7,7 +7,6 @@ import APIContext from '../APIContext'
 import './NoteListNav.css'
 
 
-
 export default class NoteListNav extends React.Component {
     static contextType = APIContext;
 
@@ -43,6 +42,8 @@ export default class NoteListNav extends React.Component {
                         Folder
                     </CircleButton>
                 </div>
+
+
             </div>
         )
     }

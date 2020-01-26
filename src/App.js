@@ -8,6 +8,7 @@ import NotePageMain from './NotePageMain/NotePageMain';
 import APIContext from './APIContext'
 import AddNote from './AddNote/AddNote'
 import config from './config'
+import AddFolder from './AddFolder/AddFolder'
 import './App.css';
 
 
@@ -121,6 +122,8 @@ class App extends Component {
           path="/note/:noteId"
           component={NotePageMain}
         />;
+        <Route path='/add-folder' component={AddFolder} />
+
       </>
     );
   }
