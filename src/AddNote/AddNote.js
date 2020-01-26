@@ -42,9 +42,9 @@ class AddNote extends Component {
         console.log()
         noteSubmit.preventDefault();
         const addedData = {
-            notes: this.state.notes,
+            name: this.state.notes,
             content: this.state.content,
-            folder: this.state.folder,
+            folderId: this.state.folder,
         }
         console.log(addedData)
 
@@ -68,7 +68,8 @@ class AddNote extends Component {
                 return res.json();
             })
             .then(data => {
-                this.context.addNote();
+                // this.context.addNote();
+                console.log(data)
             })
             .catch(err => {
                 console.log(err.message)
