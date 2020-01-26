@@ -39,6 +39,7 @@ class App extends Component {
       })
       .then(([notes, folders]) => {
         this.setState({notes, folders});
+        
       })
       .catch(error => {
         console.error({error});
@@ -47,6 +48,9 @@ class App extends Component {
 
   }
 
+  refreshPage = () => {
+    window.location.reload(false)
+  }
 
   handleDeleteNote = noteId => {
     this.setState({
@@ -55,8 +59,9 @@ class App extends Component {
   }
 
   handleNoteAdd = addNote => {
+    const pushNote = this.state.notes.push(addNote);
     this.setState({
-      notes: [...this.state.notes, addNote],
+      notes: pushNote,
     })
   }
 
@@ -141,7 +146,7 @@ class App extends Component {
     };
     return (
 
-        <APIContext.Provider value={value} addNote={this.handleNoteAdd} addFolder={this.handleFolderSubmit}>
+        <APIContext.Provider value={value} addNote={this.handleNoteAdd} addFolder={this.handleFolderSubmit} refreshPage={() => this.refreshPage}>
             <div className="App">
               <nav className="App_nav">{this.renderNavRoutes()}</nav>
               <header>

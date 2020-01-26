@@ -6,7 +6,6 @@ import config from '../config'
 
 
 
-
 class AddNote extends Component {
 
     constructor(props) {
@@ -37,8 +36,12 @@ class AddNote extends Component {
     }
 
 
+    nextPath(path) {
+        this.props.history.push(path);
+      }
+
+      
     handleNoteSubmit = (noteSubmit) => {
-        console.log()
         noteSubmit.preventDefault();
         const addedData = {
             name: this.state.notes,
@@ -67,8 +70,7 @@ class AddNote extends Component {
                 return res.json();
             })
             .then(data => {
-                // this.context.addNote();
-                console.log(data)
+                this.context.addNote();
             })
             .catch(err => {
                 console.log(err.message)
@@ -117,10 +119,9 @@ class AddNote extends Component {
                             {folderOptions}
                         </select>
                     </div>
-
+                
                     <button
                     type="submit"
-                    
                     >
                         Submit Note
                     </button>
