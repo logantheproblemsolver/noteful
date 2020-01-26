@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   handleNoteAdd = addNote => {
-    const pushNote = this.state.notes.push(addNote);
+    const pushNote = this.state.notes.concat(addNote);
     this.setState({
       notes: pushNote,
     })
