@@ -36,10 +36,6 @@ class AddNote extends Component {
     }
 
 
-    nextPath(path) {
-        this.props.history.push(path);
-      }
-
       
     handleNoteSubmit = (noteSubmit) => {
         noteSubmit.preventDefault();
@@ -70,7 +66,7 @@ class AddNote extends Component {
                 return res.json();
             })
             .then(data => {
-                this.context.addNote();
+                this.context.addNote(data);
             })
             .catch(err => {
                 console.log(err.message)
