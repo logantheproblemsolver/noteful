@@ -1,4 +1,5 @@
 import React, {Component} from  'react';
+import PropTypes from 'prop-types'
 import config from '../config'
 
 
@@ -78,6 +79,14 @@ class AddFolder extends Component {
             </div>
         )
     }
+
+    
 }
+
+
+AddFolder.propTypes = {
+    id: PropTypes.string.isRequired
+}
+
 
 export default AddFolder 

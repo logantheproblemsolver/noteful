@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import APIContext from '../APIContext'
 import CircleButton from '../CircleButton/CircleButton'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import PropTypes from 'prop-types'; 
 import config from '../config'
 
 
@@ -28,7 +29,6 @@ class AddNote extends Component {
     }
 
     onChange = (event) => {
-        console.log(event);
         this.setState({
             [event.target.name]: event.target.value,
         });
@@ -44,7 +44,6 @@ class AddNote extends Component {
             content: this.state.content,
             folderId: this.state.folder,
         }
-        console.log(addedData)
 
         const url = `${config.API_ENDPOINT}/notes`;
         const options = {
@@ -95,7 +94,7 @@ class AddNote extends Component {
                     <div className="note_title">
                         <label htmlFor="title">What would you like your Note Name to be?</label>
                         <br />
-                        <input type="text" className="addNoteTitle" name="notes" placeholder="Add Your Note Name Here" onChange={this.onChange} />
+                        <input type="text" className="addNoteTitle" id="notes" name="notes" placeholder="Add Your Note Name Here" onChange={this.onChange} />
                     </div>
                     <div className="addNote-group">
                         <label htmlFor="noteContext">What note would you like to put?</label>
@@ -133,6 +132,11 @@ class AddNote extends Component {
             </div>
         )
     }
+
+}
+
+AddNote.propTypes = {
+    id: PropTypes.string.isRequired
 }
 
 
