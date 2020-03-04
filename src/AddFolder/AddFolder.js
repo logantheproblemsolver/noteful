@@ -29,8 +29,7 @@ class AddFolder extends Component {
         const options = {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json",
-                "authorization": `Bearer ${config.API_KEY}`
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({name: this.state.folder})
             
