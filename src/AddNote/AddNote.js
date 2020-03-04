@@ -49,7 +49,8 @@ class AddNote extends Component {
         const options = {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${config.API_KEY}`
             },
             body: JSON.stringify(addedData)
         }
