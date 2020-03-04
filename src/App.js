@@ -25,9 +25,18 @@ class App extends Component {
 
 
   componentDidMount() {
+    const foldersUrl = `${config.API_ENDPOINT}/folders`
+    const notesUrl = `${config.API_ENDPOINT}/notes`
+    const options = {
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "authorization": `${config.API_KEY}`
+      }
+    }
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/notes`),
-      fetch(`${config.API_ENDPOINT}/folders`)
+      fetch(foldersUrl, options),
+      fetch(notesUrl, options)
     ])
       .then(([notesRes, foldersRes]) => {
         if (!notesRes.ok)
