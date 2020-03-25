@@ -40,7 +40,7 @@ class App extends Component {
         return Promise.all([notesRes.json(), foldersRes.json()]);
       })
       .then(([notes, folders]) => {
-        this.setState({notes, folders});
+        this.setState({folders, notes});
         
       })
       .catch(error => {
@@ -93,8 +93,9 @@ class App extends Component {
             key={path}
             path={path}
             component={NoteListNav}
-            />
+          />
         ))}
+        
         <Route 
           path="/note/:noteId"
           component={NotePageNav}
@@ -102,12 +103,8 @@ class App extends Component {
           <Route 
             path="/add-folder" 
             component={NotePageNav} />
-          <Route 
-            path="/add-note" 
-            component={AddNote} 
-            handleFolderData = {this.handleFolderData}
-            onSubmit = {noteSubmit => this.handleNoteSubmit(noteSubmit)}
-            />
+
+          <Route path='/add-folder' component={AddFolder} />
       </> 
     );
   }
@@ -123,13 +120,18 @@ class App extends Component {
             key={path}
             path={path}
             component={NoteListMain}
-          />
-        ))}
+            />
+          ))}
         <Route
           path="/note/:noteId"
           component={NotePageMain}
         />;
-        <Route path='/add-folder' component={AddFolder} />
+          <Route 
+            path="/add-note" 
+            component={AddNote} 
+            handleFolderData = {this.handleFolderData}
+            onSubmit = {noteSubmit => this.handleNoteSubmit(noteSubmit)}
+            />
 
       </>
     );

@@ -36,6 +36,7 @@ export default class NotePageMain extends React.Component {
                         <p key={i}>{para}</p>
                     )}
                 </div>
+                
             </section>
         )
     }

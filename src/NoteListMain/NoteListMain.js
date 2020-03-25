@@ -1,32 +1,22 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import {NavLink, Link} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
+import {countNotesForFolder} from '../notes-helpers'
 import APIContext from '../APIContext'
-import {getNotesForFolder} from '../notes-helpers'
 import AddNote from '../AddNote/AddNote'
 import './NoteListMain.css'
 
 
+export default class NoteListNav extends React.Component {
+    static contextType = APIContext;
 
-
-export default class NoteListMain extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             displayAddNoteForm: false,
         }
     }
-
-
-    static defaultProps = {
-        match: {
-            params: {}
-        }
-    }
-    static contextType = APIContext
-
     addNoteDisplay() {
         if (this.state.displayAddNoteForm === false) {
             return this.setState = ({
@@ -43,22 +33,24 @@ export default class NoteListMain extends React.Component {
 
 
     render() {
-        const {folderId} = this.props.match.params
-        const {notes = []} = this.context
-        const notesForFolder = getNotesForFolder(notes, folderId)
-        console.log(notesForFolder)
+        const {folders=[], notes=[]} = this.context
+        console.log(countNotesForFolder)
         return (
-            <section className='NoteListMain'>
-                <ul> 
-                    {notesForFolder.map(note => 
-                        <li key={note.id}>
-                            <Note 
-                                id={note.id}
-                                name={note.name}
-                                modified={note.modified}
-                            />
+            <div className='NotelistNav'>
+                <ul className='NoteListNav_list'>
+                    {folders.map(folder => 
+                        <li key={folder.id}>
+                            <NavLink   
+                                className='NoteListNav_folder-link'
+                                to={`/folder/${folder.id}`}
+                            >
+                                <span className='NoteListNav_num-notes'>
+                                    {countNotesForFolder(notes, folder.id)}
+                                </span>
+                                {folder.name}
+                            </NavLink>
                         </li>
-                        )}
+                    )}
                 </ul>
                 <div className='NoteListrMain_button-container'>
                     <CircleButton 
@@ -72,18 +64,19 @@ export default class NoteListMain extends React.Component {
                         <br />
                         Note
                     </CircleButton>
-                    <div className="add_folder">                    
+                    <div className="add_note">                    
                         {this.state.displayAddNoteForm === true && (
                             <AddNote />
                         )
                         }
                     </div>
                 </div>
-            </section>
+
+
+            </div>
         )
     }
+
+
 }
-
-
-
 
