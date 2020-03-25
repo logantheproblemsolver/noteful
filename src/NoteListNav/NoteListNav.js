@@ -11,12 +11,6 @@ import './NoteListNav.css'
 
 
 export default class NoteListMain extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            displayAddNoteForm: false,
-        }
-    }
 
 
     static defaultProps = {
@@ -25,19 +19,6 @@ export default class NoteListMain extends React.Component {
         }
     }
     static contextType = APIContext
-
-    addNoteDisplay() {
-        if (this.state.displayAddNoteForm === false) {
-            return this.setState = ({
-                displayAddNoteForm: true,
-            })
-        } else {
-            return this.setState = ({
-                displayAddNoteForm: false,
-            })
-        }
-
-    }
 
 
 
