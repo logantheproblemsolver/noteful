@@ -1,6 +1,6 @@
 {
   "name": "noteful",
-  "alias": "https://logans-noteful-app.now.sh",
+  "alias": "https://logan-noteful-app.now.sh",
   "version": "2.0.0",
   "routes": [
       { "handle": "filesystem" },
