@@ -31,15 +31,15 @@ class App extends Component {
       fetch(foldersUrl),
       fetch(notesUrl)
     ])
-      .then(([notesRes, foldersRes]) => {
+      .then(([foldersRes, notesRes]) => {
         if (!notesRes.ok)
           return notesRes.json().then(e => Promise.reject(e));
         if (!foldersRes.ok)
           return foldersRes.json().then(e => Promise.reject(e));
 
-        return Promise.all([notesRes.json(), foldersRes.json()]);
+        return Promise.all([foldersRes.json(), notesRes.json()]);
       })
-      .then(([notes, folders]) => {
+      .then(([folders, notes]) => {
         this.setState({folders, notes});
         
       })
