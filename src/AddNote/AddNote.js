@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import APIContext from '../APIContext'
 import CircleButton from '../CircleButton/CircleButton'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import PropTypes from 'prop-types'; 
 import config from '../config'
 
 
@@ -73,10 +72,8 @@ class AddNote extends Component {
     }
 
 
-
     render() {
         const folderOptions = this.context.folders.map((folder, i) => <option value={folder.id} key={i}> {folder.name} </option>)
-
         return (
             <div className="addNote">
                 <CircleButton 
@@ -133,10 +130,6 @@ class AddNote extends Component {
         )
     }
 
-}
-
-AddNote.propTypes = {
-    id: PropTypes.string.isRequired
 }
 
 

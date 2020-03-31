@@ -1,7 +1,8 @@
 import React, {Component} from  'react';
 import PropTypes from 'prop-types'
 import config from '../config'
-
+import { Redirect, Route } from 'react-router-dom';
+import App from '../App';
 
 
 
@@ -11,6 +12,7 @@ class AddFolder extends Component {
         super(props);
         this.state = {
             folder: '',
+            toHome: false,
         }
     }
 
@@ -46,6 +48,11 @@ class AddFolder extends Component {
             .then(data => {
                 this.context.addfolder()
             })
+            .then(
+                this.setState({
+                    toHome: true,
+                })
+            )
             .catch(err => {
                 console.log(err.message)
             });
@@ -53,8 +60,14 @@ class AddFolder extends Component {
 
 
     render() {
+
+        if (this.state.toHome === true) {
+            return <Redirect exact to='/' />
+        }
+
         return (
             <div className="addFolder" >
+                <Route exact path="/" component={App} />
                 <form className="addFolderName" onSubmit={e => this.handleFolderSubmit(e)}>
                     <h2>Create a new folder!</h2>
                     <div className="folderName">
