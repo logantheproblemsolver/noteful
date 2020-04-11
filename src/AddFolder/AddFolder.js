@@ -46,7 +46,7 @@ class AddFolder extends Component {
                 return res.json();
             })
             .then(data => {
-                this.context.addfolder()
+                this.context.addFolder(data)
             })
             .then(
                 this.setState({
@@ -62,7 +62,7 @@ class AddFolder extends Component {
     render() {
 
         if (this.state.toHome === true) {
-            return <Redirect exact to='/' />
+            return <Redirect push to='/' />
         }
 
         return (

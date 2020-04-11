@@ -149,7 +149,6 @@ class App extends Component {
 
     };
     return (
-
         <APIContext.Provider value={value} addNote={this.handleNoteAdd} addFolder={this.handleFolderSubmit} refreshPage={() => this.refreshPage}>
             <div className="App">
               <nav className="App_nav">{this.renderNavRoutes()}</nav>
