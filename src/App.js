@@ -76,7 +76,6 @@ class App extends Component {
   }
 
   handleFolderSubmit = (folderSubmit) => {
-    folderSubmit.preventDefault();
     this.setState({
       folders: [...this.state.folders, folderSubmit],
     })
@@ -146,7 +145,7 @@ class App extends Component {
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
       addNote: this.handleNoteAdd,
-
+      addFolder: this.handleFolderSubmit
     };
     return (
         <APIContext.Provider value={value} addNote={this.handleNoteAdd} addFolder={this.handleFolderSubmit} refreshPage={() => this.refreshPage}>
@@ -161,9 +160,6 @@ class App extends Component {
               <main className="App_main">{this.renderMainRoutes()}</main>
             </div>
         </APIContext.Provider>
-
-
-
     );
   }
 

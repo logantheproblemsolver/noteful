@@ -31,7 +31,6 @@ class AddNote extends Component {
         this.setState({
             [event.target.name]: event.target.value,
         });
-        console.log(this.state)
     }
 
 
@@ -53,9 +52,6 @@ class AddNote extends Component {
             body: JSON.stringify(addedData)
         }
 
-
-
-
         fetch(url, options)
             .then(res => {
                 if (!res.ok) {
@@ -65,6 +61,7 @@ class AddNote extends Component {
             })
             .then(data => {
                 this.context.addNote(data);
+                console.log(data);
             })
             .catch(err => {
                 console.log(err.message)

@@ -1,13 +1,15 @@
 import React, {Component} from  'react';
-import PropTypes from 'prop-types'
 import config from '../config'
 import { Redirect, Route } from 'react-router-dom';
+import APIContext from '../APIContext'
 import App from '../App';
 
 
 
 
 class AddFolder extends Component {
+    static contextType = APIContext;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +20,6 @@ class AddFolder extends Component {
 
 
     createNewFolder = (e) => {
-        console.log(e.target.value)
         this.setState({
             folder: e.target.value,
         })
@@ -26,7 +27,6 @@ class AddFolder extends Component {
 
 
     handleFolderSubmit = (folderSubmit) => {
-        console.log(folderSubmit)
         const url = `${config.API_ENDPOINT}/folders`
         const options = {
             method: 'POST',
@@ -47,6 +47,7 @@ class AddFolder extends Component {
             })
             .then(data => {
                 this.context.addFolder(data)
+                console.log(data);
             })
             .then(
                 this.setState({
@@ -84,7 +85,10 @@ class AddFolder extends Component {
                             >
                                 Add Folder
                             </button>
-                        <button type="reset" className="cancelFolder">
+                            <button 
+                                type="reset" 
+                                className="cancelFolder"
+                            >
                             Cancel
                         </button>
                     </div>
@@ -95,11 +99,5 @@ class AddFolder extends Component {
 
     
 }
-
-
-AddFolder.propTypes = {
-    id: PropTypes.string.isRequired
-}
-
 
 export default AddFolder 

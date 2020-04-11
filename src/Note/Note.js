@@ -30,7 +30,7 @@ export default class Note extends React.Component {
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
-      .then(() => {
+      .then((id) => {
         this.context.deleteNote(id)
         this.props.onDeleteNote(id)
       })
