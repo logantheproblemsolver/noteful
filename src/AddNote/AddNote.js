@@ -3,6 +3,7 @@ import APIContext from '../APIContext'
 import CircleButton from '../CircleButton/CircleButton'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import config from '../config'
+import { Redirect } from 'react-router-dom'
 
 
 
@@ -14,6 +15,7 @@ class AddNote extends Component {
             notes: ' ',
             content: ' ',
             folder: ' ',
+            redirect: false,
         }
     }
 
@@ -40,7 +42,7 @@ class AddNote extends Component {
         const addedData = {
             name: this.state.notes,
             content: this.state.content,
-            folderId: this.state.folder,
+            folderid: this.state.folder,
         }
 
         const url = `${config.API_ENDPOINT}/notes`;
@@ -54,6 +56,7 @@ class AddNote extends Component {
 
         fetch(url, options)
             .then(res => {
+                console.log(res)
                 if (!res.ok) {
                     throw new Error('Something went wrong, please try again later');
                 }
@@ -61,7 +64,9 @@ class AddNote extends Component {
             })
             .then(data => {
                 this.context.addNote(data);
-                console.log(data);
+                this.setState({
+                    redirect: true,
+                })
             })
             .catch(err => {
                 console.log(err.message)
@@ -70,6 +75,9 @@ class AddNote extends Component {
 
 
     render() {
+        if (this.state.redirect === true) {
+           return <Redirect exact to='/' />
+        }
         const folderOptions = this.context.folders.map((folder, i) => <option value={folder.id} key={i}> {folder.name} </option>)
         return (
             <div className="addNote">
