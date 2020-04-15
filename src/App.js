@@ -41,7 +41,6 @@ class App extends Component {
       })
       .then(([folders, notes]) => {
         console.log(folders)
-        console.log(notes)
         this.setState({folders, notes});
         
       })
@@ -124,7 +123,7 @@ class App extends Component {
             />
           ))}
         <Route
-          path="/note/:noteid"
+          path="/note/:noteId"
           component={NotePageMain}
         />;
           <Route 
