@@ -17,8 +17,6 @@ export default class Note extends React.Component {
 
   handleClickDelete = (event, id) => {
     event.preventDefault();
-
-
     fetch(`${config.API_ENDPOINT}/notes/${id}`, {
       method: 'DELETE',
       headers: {
@@ -26,8 +24,9 @@ export default class Note extends React.Component {
       },
     })
       .then(res => {
+        console.log(res)
         if (!res.ok)
-          return res.then(e => Promise.reject(e))
+          return res.statusText
         return res
       })
       .then((id) => {

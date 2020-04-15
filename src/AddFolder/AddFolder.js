@@ -40,7 +40,6 @@ class AddFolder extends Component {
         fetch(url, options)
             .then(res => {
                 if (!res.ok) {
-                    console.log(res.ok)
                     throw new Error('Something went wrong, please try again later');
                 }
                 return res.json();
